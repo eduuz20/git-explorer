@@ -1,5 +1,7 @@
+import { BrowserRouter } from "react-router-dom";
+import { AppRoutes } from "./routes/AppRoutes";
+
 import GlobalStyles from "../styles/GlobalStyles";
-import { Dashboard } from "./pages/Deshboard";
 import { ThemeProvider } from "styled-components";
 import dark from "../styles/theme/dark";
 export function App() {
@@ -7,7 +9,9 @@ export function App() {
     
     <ThemeProvider theme={dark}>
       <GlobalStyles />
-       <Dashboard />
+      <BrowserRouter>
+      <AppRoutes/>
+      </BrowserRouter>
     </ThemeProvider>
 
     

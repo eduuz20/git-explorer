@@ -1,11 +1,15 @@
 import {FaSearch} from "react-icons/fa"
-import { Container, Content } from "./styles"
-import { useState } from "react"
+import { useNavigate} from 'react-router-dom'
+import { Container, Content,ContentLoader } from "./styles"
+import {  useState } from "react"
 import { getUserDetails } from "../../api/github"
+
+import {CirclesVSD} from '../../components/loaders/HourglassVSD'
 
 export const Dashboard = () => {
  const [username, setUserName] = useState('')
  const [loading, setLoading] = useState(false)
+ const navigate = useNavigate()
 
  function handleSetUser(event) {
     setUserName(event.target.value)
@@ -15,6 +19,8 @@ export const Dashboard = () => {
  async function handleGetDetails() {
   try {
     const result = await getUserDetails(username)
+
+    navigate('/repositories', {state: {profile: result}})
 
     console.log(result)
 
@@ -39,11 +45,18 @@ export const Dashboard = () => {
                 onChange={handleSetUser}
                 />
             </label>
+            
                 
             
         
-        <button>Buscar <FaSearch /></button>
+        <button type="button" onClick={() => handleGetDetails()}>Buscar <FaSearch /></button>
         </Content>
+        {loading && ( 
+          <ContentLoader>
+           <CirclesVSD />
+        </ContentLoader>
+      )}
+       
     </Container>
     
       

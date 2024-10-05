@@ -64,3 +64,8 @@ button {
 }
 
 `
+
+export const ContentLoader = styled.div`
+ background: red;
+ margin-top: 35px;
+`
